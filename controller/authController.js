@@ -123,7 +123,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   try {
     // 3) Send it to user's email
-    const resetURL = `https://fashionkart-ecommerce.netlify.app/resetpassword/${resetToken}`;
+    const resetURL = `https://instablog-app.netlify.app/resetpassword/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordReset();
 
