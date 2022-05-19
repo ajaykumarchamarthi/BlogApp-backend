@@ -11,31 +11,31 @@ exports.getAllBlogs = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createBlog = catchAsync(async (req, res, next) => {
-  const blog = await Blog.create({
-    title: req.body.title,
-    category: req.body.category,
-    description: req.body.description,
-    picture: req.body.picture,
-    user: req.body.userId,
-  });
-  res.status(201).json({
-    status: "success",
-    data: {
-      blog,
-    },
-  });
-});
+// exports.createBlog = catchAsync(async (req, res, next) => {
+//   const blog = await Blog.create({
+//     title: req.body.title,
+//     category: req.body.category,
+//     description: req.body.description,
+//     picture: req.body.picture,
+//     user: req.body.userId,
+//   });
+//   res.status(201).json({
+//     status: "success",
+//     data: {
+//       blog,
+//     },
+//   });
+// });
 
-exports.editBlog = catchAsync(async (req, res, next) => {
-  const blog = await Blog.findByIdAndUpdate(req.body.blogId, req.body.update);
-  res.status(200).json({
-    status: "success",
-    data: {
-      blog,
-    },
-  });
-});
+// exports.editBlog = catchAsync(async (req, res, next) => {
+//   const blog = await Blog.findByIdAndUpdate(req.body.blogId, req.body.update);
+//   res.status(200).json({
+//     status: "success",
+//     data: {
+//       blog,
+//     },
+//   });
+// });
 
 exports.deleteBlog = catchAsync(async (req, res, next) => {
   await Blog.findByIdAndDelete(req.body.blogId);

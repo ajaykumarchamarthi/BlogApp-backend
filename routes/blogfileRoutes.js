@@ -32,30 +32,33 @@ router.post(
   authController.protect,
   upload.single("file"),
   async (req, res) => {
-    const file = req.file;
+    try {
+      const file = req.file;
 
-    const result = await s3Uploadv2(file);
+      const result = await s3Uploadv2(file);
 
-    const fileName = result.Location;
+      const fileName = result.Location;
 
-    console.log(fileName);
+      const blog = await Blog.create({
+        title: req.body.title,
+        category: req.body.category,
+        description: req.body.description,
+        picture: fileName,
+        user: req.body.userId,
+      });
 
-    const blog = await Blog.create({
-      title: req.body.title,
-      category: req.body.category,
-      description: req.body.description,
-      picture: fileName,
-      user: req.body.userId,
-    });
-
-    console.log(blog);
-
-    res.status(201).json({
-      status: "success",
-      data: {
-        blog,
-      },
-    });
+      res.status(201).json({
+        status: "success",
+        data: {
+          blog,
+        },
+      });
+    } catch (error) {
+      res.status(401).json({
+        status: "fail",
+        message: "Blog not added successfully",
+      });
+    }
   }
 );
 
@@ -70,17 +73,13 @@ router.patch(
 
     const fileName = result.Location;
 
-    console.log(fileName);
-
     const blog = await Blog.findByIdAndUpdate(req.body.blogId, {
-      // title: req.body.title,
-      // category: req.body.category,
-      // description: req.body.description,
+      title: req.body.title,
+      category: req.body.category,
+      description: req.body.description,
       picture: fileName,
-      // user: req.body.userId,
+      user: req.body.userId,
     });
-
-    console.log(blog);
 
     res.status(200).json({
       status: "success",

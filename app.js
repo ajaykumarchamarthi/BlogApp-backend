@@ -60,7 +60,7 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Body parser, reading data from from body into req.body
-app.use(express.json({ limit: "10kb" }));
+app.use(express.json());
 
 // Importing Error Handlers
 const AppError = require("./utils/appError");
@@ -77,6 +77,12 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blogs", blogRouter);
 
 app.use("/api/v1/blogsfile", blogfileRouter);
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to the Blog App",
+  });
+});
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));

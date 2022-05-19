@@ -7,7 +7,7 @@ exports.s3Uploadv2 = async (file) => {
 
   const param = {
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `practise/${uuid()}-${file.originalname}`,
+    Key: `blogapp/${uuid()}-${file.originalname}`,
     Body: file.buffer,
   };
 
