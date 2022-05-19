@@ -17,7 +17,10 @@ app.use(helmet());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET,PUT,PATCH,POST,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,PUT,PATCH,POST,DELETE,OPTIONS"
+  );
   res.header(
     "Access-Control-Allow-Headers",
     "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
@@ -67,9 +70,13 @@ const globalErrorHandler = require("./controller/errorController");
 const userRouter = require("./routes/userRoutes");
 const blogRouter = require("./routes/blogRoutes");
 
+const blogfileRouter = require("./routes/blogfileRoutes");
+
 // Mounting Routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/blogs", blogRouter);
+
+app.use("/api/v1/blogsfile", blogfileRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));

@@ -12,6 +12,7 @@
   "author": "Ajay Kumar C",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1137.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^14.2.0",
@@ -28,6 +29,7 @@
     "nodemailer": "^6.7.3",
     "nodemon": "^2.0.15",
     "pug": "^3.0.2",
+    "uuid": "^8.3.2",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
   }
